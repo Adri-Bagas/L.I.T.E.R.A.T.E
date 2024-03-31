@@ -7,8 +7,10 @@
 	import { formUserSchema, roles, type FormUserSchema } from './schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-
+	import { onMount } from 'svelte';
 	export let data: SuperValidated<Infer<FormUserSchema>>;
+
+    export let user: any;
 
 	const form = superForm(data, {
 		validators: zodClient(formUserSchema),
@@ -19,6 +21,29 @@
 	});
 
 	const { form: formData, enhance } = form;
+
+    onMount(() => {
+        if(user != null){
+
+            let role: "user" | "admin" | "petugas" = "user"
+
+            switch (user.role) {
+                case 1:
+                    role = "admin"
+                    break;
+                case 2:
+                    role = "petugas"
+                    break;
+                default:
+                    role = "user"
+                    break;
+            }
+
+            $formData.email = user.email
+            $formData.username = user.username
+            $formData.role = role
+        }
+    })
 
 </script>
 
@@ -50,7 +75,7 @@
             </Form.Field>
             <Form.Field {form} name="role">
                 <Form.Control let:attrs>
-                    <Form.Label>Label</Form.Label>
+                    <Form.Label>Role</Form.Label>
                     <Select.Root>
                         <Select.Input name={attrs.name} />
                         <Select.Trigger {...attrs}>

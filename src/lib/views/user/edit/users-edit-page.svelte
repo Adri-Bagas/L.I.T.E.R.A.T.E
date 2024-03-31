@@ -9,11 +9,11 @@
     <div class="hidden flex-col md:flex pb-12">
         <div class="flex-1 space-y-4 p-8 pt-6">
             <div class="flex items-center justify-between space-y-2">
-                <h2 class="text-3xl font-bold tracking-tight">Users | Create</h2>
+                <h2 class="text-3xl font-bold tracking-tight">Users | Edit</h2>
             </div>
             <Card.Root>
                 <Card.Content class="mx-auto py-10 shadow-2xl">
-                    <UsersForm data={datas.form} user={null}/>
+                    <UsersForm data={datas.form} user={datas.user}/>
                 </Card.Content>
             </Card.Root>
         </div>

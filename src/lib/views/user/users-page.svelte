@@ -5,6 +5,7 @@
     import { Button } from '$lib/components/ui/button/index';
     import { Plus } from "lucide-svelte/icons";
     export let users:UserSafe[];
+    export let deleted:UserSafe[];
 </script>
 
 <div class="h-screen overflow-auto">
@@ -29,7 +30,7 @@
                 <Tabs.Content value="thrashed" class="space-y-4 pb-16">
                     <Card.Root>
                         <Card.Content class="mx-auto py-10 shadow-2xl">
-                            <DataTable datas={users}/>
+                            <DataTable datas={deleted}/>
                         </Card.Content>
                     </Card.Root>
                 </Tabs.Content>

@@ -5,8 +5,38 @@
     import Trash2 from 'lucide-svelte/icons/trash-2'
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { Button } from '$lib/components/ui/button';
+	import { toast } from 'svelte-sonner';
+	import { goto, invalidateAll } from '$app/navigation';
+	import { redirect } from '@sveltejs/kit';
 
 	export let id: string;
+
+    let editRoute = `users/edit/${id}`;
+
+    async function deletes(id: string) {
+
+        let deleteUrl = `${window.location.origin}/dashboard/users/${id}`
+
+        const requestOptions: RequestInit = {
+			method: 'DELETE',
+			redirect: 'manual'
+		};
+
+        const response = await fetch(deleteUrl, requestOptions)
+        const result = await response.json();
+
+        if(result.success){
+            toast.success(result.msg)
+        }else{
+            toast.error(result.msg)
+        }
+        
+        goto('/dashboard').then(
+            () => goto("/dashboard/users")
+        );
+
+    }
+
 </script>
 
 <DropdownMenu.Root>
@@ -19,17 +49,17 @@
 	<DropdownMenu.Content>
 		<DropdownMenu.Group>
 			<DropdownMenu.Label>Actions</DropdownMenu.Label>
-			<DropdownMenu.Item on:click={() => navigator.clipboard.writeText(id)}>
+			<DropdownMenu.Item>
 				Show
                 <DropdownMenu.Shortcut><Eye size={14}/></DropdownMenu.Shortcut>
 			</DropdownMenu.Item>
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
-		<DropdownMenu.Item>
+		<DropdownMenu.Item href={editRoute}>
             Edit
             <DropdownMenu.Shortcut><Pencil size={14}/></DropdownMenu.Shortcut>
         </DropdownMenu.Item>
-		<DropdownMenu.Item>
+		<DropdownMenu.Item on:click={() => {deletes(id)}}>
             Delete
             <DropdownMenu.Shortcut><Trash2 size={14}/></DropdownMenu.Shortcut>
         </DropdownMenu.Item>

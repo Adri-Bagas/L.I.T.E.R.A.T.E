@@ -8,4 +8,4 @@
     <title>{data.title}</title> 
 </svelte:head>
 
-<UsersPage users={data.users}/>
+<UsersPage users={data.users} deleted={data.usersDeleted}/>

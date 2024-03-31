@@ -5,8 +5,6 @@ import type { PageServerLoad } from "./$types.js";
 
 export const load: PageServerLoad = async (events) => {
 
-
-
 	const {cookies} = events
 
 	let token = cookies.get('to')
@@ -16,10 +14,11 @@ export const load: PageServerLoad = async (events) => {
 	}
 
 	let users: UserSafe[] = await User.getAll(token)
-
+	let usersDeleted: UserSafe[] = await User.getAllThrashed(token)
 
 	return {
 		title: "User | L.I.T.E.R.A.T.E",
-		users
+		users,
+		usersDeleted
 	};
 };
