@@ -1,5 +1,5 @@
-import User from '$lib/scripts/controllers/users.js';
-import { error, json, redirect } from '@sveltejs/kit';
+import Publisher from '$lib/scripts/controllers/publishers.js';
+import { json } from '@sveltejs/kit';
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
 export async function DELETE({ cookies, params }) {
 	let token = cookies.get('to');
 
-	let datas = await User.delete(token, params.id);
+	let datas = await Publisher.delete(token, params.id);
 
 	return json(datas)
 }

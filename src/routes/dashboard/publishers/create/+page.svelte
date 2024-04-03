@@ -1,6 +1,5 @@
 <script lang=ts"">
-	import { UsersCreatePage } from "$lib/views/user/index";
-
+	import PublishersCreatePage from '$lib/views/publisher/create/publishers-create-page.svelte';
     export let data
 </script>
 
@@ -8,4 +7,4 @@
     <title>{data.title}</title> 
 </svelte:head>
 
-<UsersCreatePage datas={data}/>
+<PublishersCreatePage datas={data}/>

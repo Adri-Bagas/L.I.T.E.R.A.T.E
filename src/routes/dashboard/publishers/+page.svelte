@@ -1,5 +1,7 @@
 <script lang=ts"">
-	import UsersPage from '$lib/views/user/users-page.svelte';
+	import PublishersPage from '$lib/views/publisher/publishers-page.svelte';
+
+	
 
     export let data
 </script>
@@ -8,4 +10,4 @@
     <title>{data.title}</title> 
 </svelte:head>
 
-<UsersPage users={data.users} deleted={data.usersDeleted}/>
+<PublishersPage publisher={data.publishers}/>

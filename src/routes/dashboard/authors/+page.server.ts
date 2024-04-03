@@ -14,11 +14,11 @@ export const load: PageServerLoad = async (events) => {
 		redirect(304, "/login")
 	}
 
-	let authors: Author[] = await Author.getAll(token)
+	let author: Author[] = await Author.getAll(token)
 	// let usersDeleted: UserSafe[] = await User.getAllThrashed(token)
 
 	return {
 		title: "Author | L.I.T.E.R.A.T.E",
-		authors,
+		author,
 	};
 };

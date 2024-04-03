@@ -1,5 +1,5 @@
 import Author from '$lib/scripts/controllers/authors.js';
-import { error, json, redirect } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET() {

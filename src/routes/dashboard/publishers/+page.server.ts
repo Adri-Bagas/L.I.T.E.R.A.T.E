@@ -1,6 +1,7 @@
 import User from "$lib/scripts/controllers/users.js";
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types.js";
+import Publisher from "$lib/scripts/controllers/publishers.js";
 
 
 export const load: PageServerLoad = async (events) => {
@@ -13,12 +14,11 @@ export const load: PageServerLoad = async (events) => {
 		redirect(304, "/login")
 	}
 
-	let users: UserSafe[] = await User.getAll(token)
-	let usersDeleted: UserSafe[] = await User.getAllThrashed(token)
+	let publishers: Publisher[] = await Publisher.getAll(token)
+	// let usersDeleted: UserSafe[] = await User.getAllThrashed(token)
 
 	return {
-		title: "User | L.I.T.E.R.A.T.E",
-		users,
-		usersDeleted
+		title: "Publisher | L.I.T.E.R.A.T.E",
+		publishers,
 	};
 };

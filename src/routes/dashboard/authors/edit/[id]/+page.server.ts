@@ -32,7 +32,7 @@ export const actions = {
 		let datas = await Author.update(token, params.id, form.data);
 
         if (datas.success == true) {
-            redirect(300, "/dashboard/authors")
+            redirect(300, "/dashboard/publishers")
         } else {
             error(datas.status_code, datas.msg);
         }

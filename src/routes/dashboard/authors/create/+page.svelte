@@ -1,6 +1,5 @@
 <script lang=ts"">
 	import AuthorsCreatePage from '$lib/views/author/create/authors-create-page.svelte';
-
     export let data
 </script>
 

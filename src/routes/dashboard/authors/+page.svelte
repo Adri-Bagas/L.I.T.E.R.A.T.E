@@ -1,8 +1,5 @@
 <script lang=ts"">
 	import AuthorsPage from '$lib/views/author/authors-page.svelte';
-
-	
-
     export let data
 </script>
 
@@ -10,4 +7,4 @@
     <title>{data.title}</title> 
 </svelte:head>
 
-<AuthorsPage authors={data.authors}/>
+<AuthorsPage authors={data.author}/>
