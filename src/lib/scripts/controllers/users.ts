@@ -17,6 +17,9 @@ const User = {
 			const result = await response.json();
 
 			if (result.success == true) {
+				if(result.datas == null){
+					return [];
+				}
 				return result.datas;
 			} else {
 				error(response.status, result.msg);
@@ -41,6 +44,9 @@ const User = {
 			const result = await response.json();
 
 			if (result.success == true) {
+				if(result.datas == null){
+					return [];
+				}
 				return result.datas;
 			} else {
 				error(response.status, result.msg);

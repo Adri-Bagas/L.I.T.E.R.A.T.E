@@ -17,8 +17,12 @@ const Publisher = {
 			const result = await response.json();
 
 			if (result.success == true) {
+				if(result.datas == null){
+					return [];
+				}
 				return result.datas;
 			} else {
+				// return [];
 				error(response.status, result.msg);
 			}
 		} catch (errors) {
@@ -41,6 +45,9 @@ const Publisher = {
 			const result = await response.json();
 
 			if (result.success == true) {
+				if(result.datas == null){
+					return [];
+				}
 				return result.datas;
 			} else {
 				error(response.status, result.msg);
