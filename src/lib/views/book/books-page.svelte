@@ -4,7 +4,7 @@
     import * as Card from "$lib/components/ui/card"
     import { Button } from '$lib/components/ui/button/index';
     import { Plus } from "lucide-svelte/icons";
-    export let publisher:Publisher[];
+    export let books:Book[];
     // export let deleted:Author[];
 </script>
 
@@ -12,8 +12,8 @@
     <div class="hidden flex-col md:flex pb-12">
         <div class="flex-1 space-y-4 p-8 pt-6">
             <div class="flex items-center justify-between space-y-2">
-                <h2 class="text-3xl font-bold tracking-tight">Publishers</h2>
-                <Button href="publishers/create">Create <Plus size={16}/></Button>
+                <h2 class="text-3xl font-bold tracking-tight">Books</h2>
+                <Button href="books/create">Create <Plus size={16}/></Button>
             </div>
             <Tabs.Root value="stored" class="space-y-4">
                 <Tabs.List>
@@ -23,7 +23,7 @@
                 <Tabs.Content value="stored" class="space-y-4 pb-16">
                     <Card.Root>
                         <Card.Content class="mx-auto py-10 shadow-2xl">
-                            <DataTable datas={publisher}/>
+                            <DataTable datas={books}/>
                         </Card.Content>
                     </Card.Root>
                 </Tabs.Content> 

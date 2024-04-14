@@ -1,4 +1,4 @@
-<script lang=ts"">
+<script lang="ts">
 	import AuthorsPage from '$lib/views/author/authors-page.svelte';
     export let data
 </script>

@@ -1,4 +1,5 @@
-import { formPublisherSchema } from "$lib/components/forms/publishers/schema";
+
+import { formAuthorSchema } from "$lib/components/forms/authors/schema.js";
 import Author from "$lib/scripts/controllers/authors.js";
 import { error, redirect } from "@sveltejs/kit";
 import { fail, superValidate } from "sveltekit-superforms";
@@ -7,7 +8,7 @@ import { zod } from "sveltekit-superforms/adapters";
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
     return {
-        form: await superValidate(zod(formPublisherSchema)),
+        form: await superValidate(zod(formAuthorSchema)),
         title: "Author | L.I.T.E.R.A.T.E"
     };
 };
@@ -15,7 +16,7 @@ export async function load() {
 export const actions = {
 	default: async ({ request, cookies }) => {
 		
-		const form = await superValidate(request, zod(formPublisherSchema));
+		const form = await superValidate(request, zod(formAuthorSchema));
 
 		if (!form.valid) {
 			return fail(400, { form });

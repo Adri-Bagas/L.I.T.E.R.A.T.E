@@ -1,5 +1,6 @@
-<script lang=ts"">
-	import { UsersCreatePage } from "$lib/views/user/index";
+<script lang="ts">
+	import { BooksCreatePage } from '$lib/views/book/index.js';
+
 
     export let data
 </script>
@@ -8,4 +9,4 @@
     <title>{data.title}</title> 
 </svelte:head>
 
-<UsersCreatePage datas={data}/>
+<BooksCreatePage datas={data}/>

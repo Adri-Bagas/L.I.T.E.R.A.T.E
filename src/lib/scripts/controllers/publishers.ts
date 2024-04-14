@@ -30,6 +30,30 @@ const Publisher = {
 			error(500, `${errors}`);
 		}
 	},
+	getAllIdName: async function (token: string | undefined) {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${token}`);
+
+		const requestOptions: RequestInit = {
+			method: 'GET',
+			headers: myHeaders,
+			redirect: 'manual'
+		};
+
+		try {
+			const response = await fetch(`${CONFIG.apiUrl}/publisher/all/ids`, requestOptions);
+			const result = await response.json();
+
+			if (response.status == 200) {
+				return result;
+			} else {
+				error(response.status, result.msg);
+			}
+		} catch (errors) {
+			console.log(errors);
+			error(500, `${errors}`);
+		}
+	},
     getAllThrashed: async function (token: string | undefined) {
 		const myHeaders = new Headers();
 		myHeaders.append('Authorization', `Bearer ${token}`);
@@ -64,6 +88,8 @@ const Publisher = {
 		const formdata = new FormData();
         formdata.append("name", datas.name);
         formdata.append("desc", datas.desc);
+		formdata.append("phone_number", datas.phone_number)
+		formdata.append("address", datas.address)
 
 		const requestOptions: RequestInit = {
 			method: 'POST',

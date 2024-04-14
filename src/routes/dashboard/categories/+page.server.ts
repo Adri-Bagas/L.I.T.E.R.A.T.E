@@ -1,8 +1,6 @@
-
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types.js";
-
-import Book from "$lib/scripts/controllers/books.js";
+import Category from "$lib/scripts/controllers/category.js";
 
 
 export const load: PageServerLoad = async (events) => {
@@ -15,11 +13,11 @@ export const load: PageServerLoad = async (events) => {
 		redirect(304, "/login")
 	}
 
-	let books: Book[] = await Book.getAll(token)
+	let category: Category[] = await Category.getAll(token)
 	// let usersDeleted: UserSafe[] = await User.getAllThrashed(token)
 
 	return {
-		title: "Book | L.I.T.E.R.A.T.E",
-		books,
+		title: "Category | L.I.T.E.R.A.T.E",
+		category,
 	};
 };

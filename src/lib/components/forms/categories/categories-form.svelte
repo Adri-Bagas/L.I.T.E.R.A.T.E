@@ -1,19 +1,18 @@
 <script lang="ts">
-
     import * as Form from '$lib/components/ui/form';
 	import { Input } from '$lib/components/ui/input';
 	import { toast } from 'svelte-sonner';
-	import { formAuthorSchema, type FormAuthorSchema } from './schema';
+	import { formCategorySchema, type FormCategorySchema } from './schema';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { onMount } from 'svelte';
-	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
-	export let data: SuperValidated<Infer<FormAuthorSchema>>;
+    import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	export let data: SuperValidated<Infer<FormCategorySchema>>;
 
-    export let authors: any;
+    export let category: any;
 
 	const form = superForm(data, {
-		validators: zodClient(formAuthorSchema),
+		validators: zodClient(formCategorySchema),
 		onError(event) {
 			let msg = JSON.parse(event.result.error.message);			
 			toast.error(msg)
@@ -23,9 +22,9 @@
 	const { form: formData, enhance } = form;
 
     onMount(() => {
-        if(authors != null){
-            $formData.name = authors.name
-            $formData.desc = authors.desc
+        if(category != null){
+            $formData.name = category.name
+            $formData.desc = category.desc
         }
     })
 

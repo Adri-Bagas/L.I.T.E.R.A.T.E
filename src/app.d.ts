@@ -29,23 +29,41 @@ declare global {
 		deleted_by?: number;
 	}
 
+	type Category = {
+		id: number;
+		name: string;
+		desc: string;
+		created_at?: string;
+		updated_at?: string;
+		deleted_at?: string;
+		created_by?: number;
+		updated_by?: number;
+	}
+
 	type Book = {
 		id: number;
 		ISBN: string;
-		address: string;
-		phone_number: string;
+		title: string;
+		lang: string;
 		num_of_pages: number;
 		price?: number;
 		desc: string;
-		sypnosis: string;
 		created_at?: string;
 		updated_at?: string;
 		deleted_at?: string;
 		created_by?: number;
 		updated_by?: number;
 		deleted_by?: number;
-		author_id?: number;
-		publisher_id?: number;
+		is_enabled: boolean;
+		is_online: boolean;
+		stock: number;
+		authors: string[] ;
+		authors_id: number[];
+		publisher: string;
+		publisher_id: number;
+		tags: string[];
+		categories: string[];
+		categories_id: number[];
 	}
 
 	type Publisher = {

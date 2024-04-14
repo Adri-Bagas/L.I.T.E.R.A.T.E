@@ -50,6 +50,7 @@
 		"radix-svelte": "^0.9.0",
 		"svelte-chartjs": "^3.1.5",
 		"svelte-radix": "^1.0.3",
+		"svelte-select": "^5.8.3",
 		"svelte-sonner": "^0.3.19",
 		"sveltekit-superforms": "^2.11.0",
 		"tailwind-merge": "^2.2.1",

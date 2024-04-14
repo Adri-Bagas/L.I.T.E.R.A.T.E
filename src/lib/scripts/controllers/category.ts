@@ -1,7 +1,7 @@
 import CONFIG from '$lib/config/config';
 import { error } from '@sveltejs/kit';
 
-const Author = {
+const Category = {
 	getAll: async function (token: string | undefined) {
 		const myHeaders = new Headers();
 		myHeaders.append('Authorization', `Bearer ${token}`);
@@ -13,7 +13,7 @@ const Author = {
 		};
 
 		try {
-			const response = await fetch(`${CONFIG.apiUrl}/author`, requestOptions);
+			const response = await fetch(`${CONFIG.apiUrl}/category`, requestOptions);
 			const result = await response.json();
 
 			if (result.success == true) {
@@ -40,7 +40,7 @@ const Author = {
 		};
 
 		try {
-			const response = await fetch(`${CONFIG.apiUrl}/author/all/ids`, requestOptions);
+			const response = await fetch(`${CONFIG.apiUrl}/category/all/ids`, requestOptions);
 			const result = await response.json();
 
 			if (response.status == 200) {
@@ -64,7 +64,7 @@ const Author = {
 		};
 
 		try {
-			const response = await fetch(`${CONFIG.apiUrl}/author/thrashed`, requestOptions);
+			const response = await fetch(`${CONFIG.apiUrl}/category/thrashed`, requestOptions);
 			const result = await response.json();
 
 			if (result.success == true) {
@@ -96,7 +96,7 @@ const Author = {
 		};
 
 		try {
-			const response = await fetch(`${CONFIG.apiUrl}/author`, requestOptions);
+			const response = await fetch(`${CONFIG.apiUrl}/category`, requestOptions);
 			const result = await response.json();
 
 			return result;
@@ -116,7 +116,7 @@ const Author = {
 		};
 
 		try {
-			const response = await fetch(`${CONFIG.apiUrl}/author/${id}`, requestOptions);
+			const response = await fetch(`${CONFIG.apiUrl}/category/${id}`, requestOptions);
 			const result = await response.json();
 			return result;
 		} catch (error) {
@@ -139,7 +139,7 @@ const Author = {
 		};
 
 		try {
-			const response = await fetch(`${CONFIG.apiUrl}/author/${id}`, requestOptions);
+			const response = await fetch(`${CONFIG.apiUrl}/category/${id}`, requestOptions);
 			const result = await response.json();
 			return result;
 		} catch (error) {
@@ -157,7 +157,7 @@ const Author = {
 		};
 
 		try {
-			const response = await fetch(`${CONFIG.apiUrl}/author/${id}`, requestOptions);
+			const response = await fetch(`${CONFIG.apiUrl}/category/${id}`, requestOptions);
 			const result = await response.json();
 			return result
 		} catch (error) {
@@ -166,4 +166,4 @@ const Author = {
 	}
 };
 
-export default Author;
+export default Category;

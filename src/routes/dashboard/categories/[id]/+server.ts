@@ -1,5 +1,5 @@
-import Book from '$lib/scripts/controllers/books.js';
-import { error, json, redirect } from '@sveltejs/kit';
+import Category from '$lib/scripts/controllers/category.js';
+import { json } from '@sveltejs/kit';
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
 export async function DELETE({ cookies, params }) {
 	let token = cookies.get('to');
 
-	let datas = await Book.delete(token, params.id);
+	let datas = await Category.delete(token, params.id);
 
 	return json(datas)
 }

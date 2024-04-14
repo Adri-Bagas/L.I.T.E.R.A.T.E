@@ -1,5 +1,5 @@
-import { formAuthorSchema } from "$lib/components/forms/authors/schema";
-import Author from "$lib/scripts/controllers/authors.js";
+import { formCategorySchema } from "$lib/components/forms/categories/schema.js";
+import Category from "$lib/scripts/controllers/category.js";
 import { error, redirect } from "@sveltejs/kit";
 import { fail, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
@@ -9,19 +9,19 @@ export async function load({ params, cookies }) {
 
     let token = cookies.get('to')
 
-    let author = await Author.find(token, params.id)
+    let category = await Category.find(token, params.id)
 
     return {
-        form: await superValidate(zod(formAuthorSchema)),
-        title: "Author | L.I.T.E.R.A.T.E",
-        author: author.data
+        form: await superValidate(zod(formCategorySchema)),
+        title: "Category | L.I.T.E.R.A.T.E",
+        category: category.data
     };
 };
 
 export const actions = {
 	default: async ({ request, cookies, params }) => {
 		
-		const form = await superValidate(request, zod(formAuthorSchema));
+		const form = await superValidate(request, zod(formCategorySchema));
 
 		if (!form.valid) {
 			return fail(400, { form });
@@ -29,10 +29,10 @@ export const actions = {
 
         let token = cookies.get('to')
 
-		let datas = await Author.update(token, params.id, form.data);
+		let datas = await Category.update(token, params.id, form.data);
 
         if (datas.success == true) {
-            redirect(300, "/dashboard/authors")
+            redirect(300, "/dashboard/publishers")
         } else {
             error(datas.status_code, datas.msg);
         }

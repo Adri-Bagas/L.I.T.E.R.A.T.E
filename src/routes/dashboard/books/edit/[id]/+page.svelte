@@ -1,5 +1,6 @@
 <script lang=ts"">
-	import { UsersEditPage } from "$lib/views/user/index";
+	import { BooksEditPage } from '$lib/views/book/index.js';
+
 
     export let data
 </script>
@@ -8,4 +9,4 @@
     <title>{data.title}</title> 
 </svelte:head>
 
-<UsersEditPage datas={data} />
+<BooksEditPage datas={data} />

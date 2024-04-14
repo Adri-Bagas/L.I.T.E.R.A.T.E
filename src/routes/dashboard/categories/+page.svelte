@@ -1,7 +1,5 @@
 <script lang="ts">
-	import BooksPage from '$lib/views/book/books-page.svelte';
-
-	
+	import { CategoriesPage } from '$lib/views/categories/index.js';
 
     export let data
 </script>
@@ -10,4 +8,4 @@
     <title>{data.title}</title> 
 </svelte:head>
 
-<BooksPage books={data.books}/>
+<CategoriesPage categories={data.category}/>

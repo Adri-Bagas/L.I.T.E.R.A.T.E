@@ -1,4 +1,3 @@
-import User from "$lib/scripts/controllers/users.js";
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types.js";
 import Author from "$lib/scripts/controllers/authors.js";
