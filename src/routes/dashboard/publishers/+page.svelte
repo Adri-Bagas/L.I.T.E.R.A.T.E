@@ -1,4 +1,4 @@
-<script lang=ts"">
+<script lang="ts">
 	import PublishersPage from '$lib/views/publisher/publishers-page.svelte';
 
 	

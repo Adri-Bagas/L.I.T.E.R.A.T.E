@@ -1,4 +1,4 @@
-<script lang=ts"">
+<script lang="ts">
 	import UsersPage from '$lib/views/user/users-page.svelte';
 
     export let data

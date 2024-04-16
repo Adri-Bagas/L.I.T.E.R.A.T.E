@@ -1,4 +1,4 @@
-<script lang=ts"">
+<script lang="ts">
 	import { UsersCreatePage } from "$lib/views/user/index";
 
     export let data

@@ -1,6 +1,8 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 
+import type { string } from 'zod';
+
 declare global {
 	namespace App {
 		// interface Error {}
@@ -11,10 +13,25 @@ declare global {
 	}
 
 	type UserSafe = {
-		id:string,
-		username: string,
-		email: string,
-		last_active: string | null | undefined | Date
+		id: string;
+		username: string;
+		email: string;
+		last_active: string | null | undefined | Date;
+	};
+
+	type Member = {
+		id:number; 
+		username:string;
+		full_name:string;
+		email: string;
+		password:    string
+		phone_number: string
+		address:     string
+		created_at?:   string
+		updated_at?:   string
+		deleted_at?:   string
+		last_active?:  string
+		profile_pic?:  string
 	}
 
 	type Author = {
@@ -27,7 +44,7 @@ declare global {
 		created_by?: number;
 		updated_by?: number;
 		deleted_by?: number;
-	}
+	};
 
 	type Category = {
 		id: number;
@@ -38,7 +55,7 @@ declare global {
 		deleted_at?: string;
 		created_by?: number;
 		updated_by?: number;
-	}
+	};
 
 	type Book = {
 		id: number;
@@ -57,14 +74,24 @@ declare global {
 		is_enabled: boolean;
 		is_online: boolean;
 		stock: number;
-		authors: string[] ;
+		authors: string[];
 		authors_id: number[];
 		publisher: string;
 		publisher_id: number;
 		tags: string[];
 		categories: string[];
 		categories_id: number[];
-	}
+		qty: number;
+		condition: string | number;
+	};
+
+	type BookDetails = {
+		id: number;
+		title: string;
+		sn: string;
+		condition: string;
+		status: string;
+	};
 
 	type Publisher = {
 		id: number;
@@ -78,7 +105,7 @@ declare global {
 		created_by?: number;
 		updated_by?: number;
 		deleted_by?: number;
-	}
+	};
 
 	type User = {
 		id: number;
@@ -94,7 +121,15 @@ declare global {
 		deleted_by?: number;
 		role: number;
 		profile_pic?: string;
-	}
+	};
+
+	type TransactionInventoryInOut = {
+		id: number;
+		date: string;
+		detail: string;
+		created_at: string;
+		approver: User;
+	};
 }
 
 export {};

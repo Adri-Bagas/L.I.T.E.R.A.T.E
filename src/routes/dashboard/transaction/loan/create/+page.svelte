@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { UsersEditPage } from "$lib/views/user/index";
+	import LoanCreatePage from '$lib/views/loan/create/loan-create-page.svelte';
 
     export let data
 </script>
@@ -8,4 +8,4 @@
     <title>{data.title}</title> 
 </svelte:head>
 
-<UsersEditPage datas={data} />
+<LoanCreatePage datas={data}/>
