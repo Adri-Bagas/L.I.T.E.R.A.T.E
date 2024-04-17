@@ -5,9 +5,11 @@
 	import ButtonRemove from './button-remove.svelte';
 	import { addPagination, addTableFilter } from 'svelte-headless-table/plugins';
 	import { Button } from '$lib/components/ui/button';
-	import { LoanAdded } from '$lib/scripts/stores/loan-table';
+	import { ReturningTable } from '$lib/scripts/stores/return-table';
+	import InputCondition from './input-condition.svelte';
+	import InputStatus from './input-status.svelte';
 
-	const tableSelection = createTable(LoanAdded, {
+	const tableSelection = createTable(ReturningTable, {
 		page: addPagination({
             initialPageSize: 5
         }),
@@ -26,21 +28,19 @@
 			header: 'Title'
 		}),
         tableSelection.column({
-			accessor: 'condition',
-			header: 'Condition'
-		}),
-		tableSelection.column({
 			accessor: (book) => book,
-			header: '',
-			cell: ({ value }) => {
-				return createRender(ButtonRemove, { book: value });
-			},
-			plugins: {
-				filter: {
-					exclude: true
-				}
-			}
-		})
+			header: 'Condition',
+            cell: ({ value }) => {
+                return createRender(InputCondition, {book: value})
+            }
+		}),
+        tableSelection.column({
+			accessor: (book) => book,
+			header: 'Status',
+            cell: ({ value }) => {
+                return createRender(InputStatus, {book: value})
+            }
+		}),
 	]);
 
 	const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates } =

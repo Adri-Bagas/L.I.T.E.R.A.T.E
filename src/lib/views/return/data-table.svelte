@@ -26,35 +26,13 @@
 		}),
 		table.column({
 			accessor: 'date',
-			header: 'Date',
+			header: 'Return Date',
 			cell: ({ value }) => {
 				const date = new Date(value as string);
 				const format = new Intl.DateTimeFormat('en-US', {
 					dateStyle: 'medium',
 				}).format(date);
 				return format;
-			},
-		}),
-		table.column({
-			accessor: 'expected_return_date',
-			header: 'Expected Return',
-			cell: ({ value }) => {
-				const date = new Date(value as string);
-				const format = new Intl.DateTimeFormat('en-US', {
-					dateStyle: 'medium',
-				}).format(date);
-				return format;
-			},
-		}),
-		table.column({
-			accessor: ({ is_returned }) => is_returned,
-			header: 'Status',
-			cell: ({ value }) => {
-				if(value){
-					return createRender(StatusComponent, { text: "RETURNED", variant: "link" });
-				}else{
-					return createRender(StatusComponent, { text: "NOT RETURNED", variant: "destructive" });
-				}
 			},
 		}),
 		table.column({
@@ -63,17 +41,8 @@
 		}),
 
 		table.column({
-			accessor: ({ approval_status }) => approval_status,
-			header: 'Approval',
-			cell: ({ value }) => {
-				if(value == "WAITING"){
-					return createRender(StatusComponent, { text: "RETURNED", variant: "outline" });
-				}else if (value == "APPROVE"){
-					return createRender(StatusComponent, { text: "APPROVED", variant: "link"});
-				}else {
-					return createRender(StatusComponent, { text: "DECLINE", variant: "destructive"})
-				}
-			},
+			accessor:'penalty',
+			header: "Penalty Fee"
 		}),
 
 		table.column({

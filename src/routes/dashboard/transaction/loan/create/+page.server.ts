@@ -1,8 +1,7 @@
 
-import { formInventoryInSchema } from "$lib/components/forms/transaction/inventory-in/schema.js";
+import { formLoanSchema } from "$lib/components/forms/transaction/loan/schema.js";
 import Book from "$lib/scripts/controllers/books.js";
-// import InventoryIn from "$lib/scripts/controllers/transactions/inventory-in.js";
-// import { error, redirect } from "@sveltejs/kit";
+import Member from "$lib/scripts/controllers/member.js";
 import { fail, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 
@@ -14,20 +13,23 @@ export async function load({cookies}) {
 
     let books: BookDetails[] = await Book.getAllBooksDetails(token)
 
+    let members = await Member.getAllIdName(token);
+
     return {
-        form: await superValidate(zod(formInventoryInSchema)),
+        form: await superValidate(zod(formLoanSchema)),
         title: "Loan | L.I.T.E.R.A.T.E",
         books,
-        to: token
+        to: token,
+        members
     };
 };
 
 export const actions = {
 	default: async ({ request, cookies }) => {
 		
-		const form = await superValidate(request, zod(formInventoryInSchema));
+		const form = await superValidate(request, zod(formLoanSchema));
 
-		if (!form.valid || form.data.books_qty.size < 1) {
+		if (!form.valid || form.data.books_id.length < 1) {
 			return fail(400, { form });
 		}
 

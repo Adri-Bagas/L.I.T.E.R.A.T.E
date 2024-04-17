@@ -1,6 +1,6 @@
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types.js";
-import InventoryOut from "$lib/scripts/controllers/transactions/inventory-out.js";
+import Loan from "$lib/scripts/controllers/transactions/loan.js";
 
 
 export const load: PageServerLoad = async (events) => {
@@ -13,7 +13,7 @@ export const load: PageServerLoad = async (events) => {
 		redirect(304, "/login")
 	}
 
-	let transactions: TransactionInventoryInOut[] = await InventoryOut.getAll(token)
+	let transactions: TransactionLoanReturn[] = await Loan.getAll(token)
 	// let usersDeleted: UserSafe[] = await User.getAllThrashed(token)
 
 	return {

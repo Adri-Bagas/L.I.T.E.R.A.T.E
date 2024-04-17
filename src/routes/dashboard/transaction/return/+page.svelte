@@ -1,5 +1,5 @@
 <script lang="ts">
-	import InventoryInPage from '$lib/views/inventory-in/inventory-in-page.svelte';
+	import ReturnPage from '$lib/views/return/return-page.svelte';
 
     export let data
 </script>
@@ -8,4 +8,4 @@
     <title>{data.title}</title> 
 </svelte:head>
 
-<InventoryInPage transaction={data.transactions}/>
+<ReturnPage transaction={data.transactions}/> 

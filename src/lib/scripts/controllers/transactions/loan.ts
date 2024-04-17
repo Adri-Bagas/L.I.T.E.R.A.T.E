@@ -1,7 +1,7 @@
 import CONFIG from '$lib/config/config';
 import { error } from '@sveltejs/kit';
 
-const InventoryIn = {
+const Loan = {
 	getAll: async function (token: string | undefined) {
 		const myHeaders = new Headers();
 		myHeaders.append('Authorization', `Bearer ${token}`);
@@ -13,7 +13,7 @@ const InventoryIn = {
 		};
 
 		try {
-			const response = await fetch(`${CONFIG.apiUrl}/transaction/loaning`, requestOptions);
+			const response = await fetch(`${CONFIG.apiUrl}/transaction/loan`, requestOptions);
 			const result = await response.json();
 
 			if (result.success == true) {
@@ -29,6 +29,30 @@ const InventoryIn = {
 			error(500, `${errors}`);
 		}
 	},
+	getAllIdName: async function (token: string | undefined) {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${token}`);
+
+		const requestOptions: RequestInit = {
+			method: 'GET',
+			headers: myHeaders,
+			redirect: 'manual'
+		};
+
+		try {
+			const response = await fetch(`${CONFIG.apiUrl}/transaction/loan/all/ids`, requestOptions);
+			const result = await response.json();
+
+			if (response.status == 200) {
+				return result;
+			} else {
+				error(response.status, result.msg);
+			}
+		} catch (errors) {
+			console.log(errors);
+			error(500, `${errors}`);
+		}
+	},
 	store: async function (token: string | undefined, datas: any) {
 		const myHeaders = new Headers();
 		myHeaders.append('Authorization', `Bearer ${token}`);
@@ -36,11 +60,11 @@ const InventoryIn = {
 
 		const raw = JSON.stringify({
 			transaction_type: 'LOAN',
+			member_id: datas.member_id,
 			date: datas.date,
 			detail: datas.detail,
-			books_qty: Object.fromEntries(datas.books_qty)
+			books_id: datas.books_id
 		});
-
 
 		const requestOptions: RequestInit = {
 			method: 'POST',
@@ -58,7 +82,26 @@ const InventoryIn = {
 			console.error(errors);
 			error(500, `${errors}`);
 		}
+	},
+	find: async function (token: string | undefined, id: number) {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${token}`);
+
+		const requestOptions: RequestInit = {
+			method: 'GET',
+			headers: myHeaders,
+			redirect: 'manual'
+		};
+
+		try {
+			const response = await fetch(`${CONFIG.apiUrl}/transaction/loan/${id}`, requestOptions);
+			const result = await response.json();
+			return result;
+		} catch (error) {
+			console.error(error);
+			return;
+		}
 	}
 };
 
-export default InventoryIn;
+export default Loan;

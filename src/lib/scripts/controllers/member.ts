@@ -29,6 +29,30 @@ const Member = {
 			error(500, `${errors}`);
 		}
 	},
+	getAllIdName: async function (token: string | undefined) {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${token}`);
+
+		const requestOptions: RequestInit = {
+			method: 'GET',
+			headers: myHeaders,
+			redirect: 'manual'
+		};
+
+		try {
+			const response = await fetch(`${CONFIG.apiUrl}/member/all/ids`, requestOptions);
+			const result = await response.json();
+
+			if (response.status == 200) {
+				return result;
+			} else {
+				error(response.status, result.msg);
+			}
+		} catch (errors) {
+			console.log(errors);
+			error(500, `${errors}`);
+		}
+	},
     getAllThrashed: async function (token: string | undefined) {
 		const myHeaders = new Headers();
 		myHeaders.append('Authorization', `Bearer ${token}`);

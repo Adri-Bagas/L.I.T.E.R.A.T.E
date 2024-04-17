@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LoanForm from "$lib/components/forms/transaction/loan/loan-form.svelte";
+	import ReturnForm from "$lib/components/forms/transaction/return/return-form.svelte";
     import * as Card from "$lib/components/ui/card"
 
     export let datas: any
@@ -9,11 +9,11 @@
     <div class="hidden flex-col md:flex pb-12">
         <div class="flex-1 space-y-4 p-8 pt-6">
             <div class="flex items-center justify-between space-y-2">
-                <h2 class="text-3xl font-bold tracking-tight">Loan | Create</h2>
+                <h2 class="text-3xl font-bold tracking-tight">Return | Create</h2>
             </div>
             <Card.Root>
                 <Card.Content class="mx-auto py-10 shadow-2xl">
-                    <LoanForm data={datas.form} books={datas.books} t={datas.to} members={datas.members}/>
+                    <ReturnForm data={datas.form} t={datas.to} transactions={datas.transactions}/>
                 </Card.Content>
             </Card.Root>
         </div>

@@ -13,7 +13,7 @@
         <div class="flex-1 space-y-4 p-8 pt-6">
             <div class="flex items-center justify-between space-y-2">
                 <h2 class="text-3xl font-bold tracking-tight">Loan</h2>
-                <Button href="loan/create">Create <Plus size={16}/></Button>
+                <Button href="return/create">Create <Plus size={16}/></Button>
             </div>
             <Tabs.Root value="stored" class="space-y-4">
                 <Tabs.List>

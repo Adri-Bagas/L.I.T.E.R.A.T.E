@@ -89,8 +89,9 @@ declare global {
 		id: number;
 		title: string;
 		sn: string;
-		condition: string;
-		status: string;
+		condition: string | number;
+		status: string | number;
+		price?: number ;
 	};
 
 	type Publisher = {
@@ -130,6 +131,20 @@ declare global {
 		created_at: string;
 		approver: User;
 	};
+	
+	type TransactionLoanReturn = {
+		id: number;
+		date: string;
+		expected_return_date?: string;
+		detail: string;
+		created_at: string;
+		approval_status?: string;
+		is_returned?: boolean;
+		penalty?: number;
+		member: Member;
+		approver: User;
+		books: BookDetails;
+	}
 }
 
 export {};

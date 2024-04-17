@@ -7,6 +7,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { ArrowUpDown, Search } from 'lucide-svelte';
 	import { Input } from '$lib/components/ui/input';
+	import StatusComponent from '$lib/components/custom/status-component.svelte';
 
 	export let datas: Book[];
 
@@ -46,10 +47,24 @@
 		table.column({
 			accessor: 'is_enabled',
 			header: 'Enabled',
+			cell: ({ value }) => {
+				if(value){
+					return createRender(StatusComponent, { text: "ENABLED", variant: "link" });
+				}else{
+					return createRender(StatusComponent, { text: "DISABLED", variant: "destructive" });
+				}
+			},
 		}),
 		table.column({
 			accessor: 'is_online',
 			header: 'Avail Online',
+			cell: ({ value }) => {
+				if(value){
+					return createRender(StatusComponent, { text: "AVAIL", variant: "link" });
+				}else{
+					return createRender(StatusComponent, { text: "NOT AVAIL", variant: "destructive" });
+				}
+			},
 		}),
 		table.column({
 			id: 'actions',
