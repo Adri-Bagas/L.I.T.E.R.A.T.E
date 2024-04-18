@@ -53,6 +53,24 @@ const Member = {
 			error(500, `${errors}`);
 		}
 	},
+	findWithDetails: async function (token: string | undefined, id: string) {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${token}`);
+
+		const requestOptions: RequestInit = {
+			method: 'GET',
+			headers: myHeaders,
+			redirect: 'manual'
+		};
+
+		try {
+			const response = await fetch(`${CONFIG.apiUrl}/member/${id}/details`, requestOptions);
+			const result = await response.json();
+			return result;
+		} catch (error) {
+			console.error(error);
+		}
+	},
     getAllThrashed: async function (token: string | undefined) {
 		const myHeaders = new Headers();
 		myHeaders.append('Authorization', `Bearer ${token}`);

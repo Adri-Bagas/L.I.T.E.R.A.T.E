@@ -32,6 +32,7 @@ declare global {
 		deleted_at?:   string
 		last_active?:  string
 		profile_pic?:  string
+		transactions?: TransactionLoanReturn[]
 	}
 
 	type Author = {
@@ -83,6 +84,8 @@ declare global {
 		categories_id: number[];
 		qty: number;
 		condition: string | number;
+		books: BookDetails[];
+		media_loc?: string;
 	};
 
 	type BookDetails = {
@@ -143,7 +146,7 @@ declare global {
 		penalty?: number;
 		member: Member;
 		approver: User;
-		books: BookDetails;
+		books: BookDetails[];
 	}
 }
 

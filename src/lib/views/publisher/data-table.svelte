@@ -36,6 +36,10 @@
 			header: 'Phone Number'
 		}),
 		table.column({
+			accessor: 'desc',
+			header: 'Description'
+		}),
+		table.column({
 			accessor: 'created_at',
 			header: 'Created At',
 			cell: ({ value }) => {

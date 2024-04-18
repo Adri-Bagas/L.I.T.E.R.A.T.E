@@ -1,6 +1,6 @@
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import Member from "$lib/scripts/controllers/member";
+import Loan from "$lib/scripts/controllers/transactions/loan";
 
 export const load: PageServerLoad = async (events) => {
 
@@ -12,10 +12,10 @@ export const load: PageServerLoad = async (events) => {
 		redirect(304, "/login")
 	}
 
-	let member:any = await Member.findWithDetails(token, params.id)
+	let transaction:any = await Loan.find(token, parseInt(params.id))
 
 	return {
-		title: "Book | L.I.T.E.R.A.T.E",
-		member: member.data,
+		title: "Loan | L.I.T.E.R.A.T.E",
+		transaction: transaction.data,
 	};
 };

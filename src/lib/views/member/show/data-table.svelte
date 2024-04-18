@@ -2,13 +2,14 @@
 	import { createRender, createTable, Render, Subscribe } from 'svelte-headless-table';
 	import { readable } from 'svelte/store';
 	import * as Table from '$lib/components/ui/table';
-	import DataTableActions from './data-table-actions.svelte';
+	import DataTableActions from '../../loan/data-table-actions.svelte';
 	import { addPagination, addSortBy, addTableFilter } from 'svelte-headless-table/plugins';
 	import { Button } from '$lib/components/ui/button';
 	import { ArrowUpDown, Search } from 'lucide-svelte';
 	import { Input } from '$lib/components/ui/input';
+	import StatusComponent from '$lib/components/custom/status-component.svelte';
 
-	export let datas: Author[];
+	export let datas: TransactionLoanReturn[];
 
 	const table = createTable(readable(datas), {
 		page: addPagination(),
@@ -20,33 +21,60 @@
 
 	const columns = table.createColumns([
 		table.column({
-			accessor: 'id',
-			header: 'ID'
-		}),
-		table.column({
-			accessor: 'name',
-			header: 'Name'
-		}),
-		table.column({
-			accessor: "desc",
-			header: "Description"
-		}),
-		table.column({
-			accessor: 'created_at',
-			header: 'Created At',
+			accessor: 'date',
+			header: 'Date',
 			cell: ({ value }) => {
 				const date = new Date(value as string);
 				const format = new Intl.DateTimeFormat('en-US', {
-					dateStyle: 'full',
-					timeStyle: 'medium'
+					dateStyle: 'medium',
 				}).format(date);
 				return format;
 			},
-			plugins: {
-				filter: {
-					exclude: true
+		}),
+		table.column({
+			accessor: 'expected_return_date',
+			header: 'Expected Return',
+			cell: ({ value }) => {
+				const date = new Date(value as string);
+				const format = new Intl.DateTimeFormat('en-US', {
+					dateStyle: 'medium',
+				}).format(date);
+				return format;
+			},
+		}),
+		table.column({
+			accessor: ({ is_returned }) => is_returned,
+			header: 'Status',
+			cell: ({ value }) => {
+				if(value){
+					return createRender(StatusComponent, { text: "RETURNED", variant: "link" });
+				}else{
+					return createRender(StatusComponent, { text: "NOT RETURNED", variant: "destructive" });
 				}
-			}
+			},
+		}),
+		table.column({
+			accessor: 'detail',
+			header: 'Detail'
+		}),
+
+		table.column({
+			accessor: ({ approval_status }) => approval_status,
+			header: 'Approval',
+			cell: ({ value }) => {
+				if(value == "WAITING"){
+					return createRender(StatusComponent, { text: "RETURNED", variant: "outline" });
+				}else if (value == "APPROVE"){
+					return createRender(StatusComponent, { text: "APPROVED", variant: "link"});
+				}else {
+					return createRender(StatusComponent, { text: "DECLINE", variant: "destructive"})
+				}
+			},
+		}),
+
+		table.column({
+			accessor: ({approver}) => approver.username,
+			header: 'Approved By'
 		}),
 		table.column({
 			id: 'actions',
@@ -80,7 +108,7 @@
 		<Input class="w-1/6" placeholder="Search..." type="text" bind:value={$filterValue} />
 	</div>
 
-	<div class="rounded-md border">
+	<div class="rounded-md border w-full overflow-x-auto">
 		<Table.Root {...$tableAttrs}>
 			<Table.Header>
 				{#each $headerRows as headerRow}
@@ -110,7 +138,7 @@
 						<Table.Row {...rowAttrs}>
 							{#each row.cells as cell (cell.id)}
 								<Subscribe attrs={cell.attrs()} let:attrs>
-									<Table.Cell {...attrs}>
+									<Table.Cell {...attrs} >
 										<Render of={cell.render()} />
 									</Table.Cell>
 								</Subscribe>

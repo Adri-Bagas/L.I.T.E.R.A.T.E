@@ -6,6 +6,8 @@
 
 	export let id: any;
 
+	let showUrl = `${window.location.origin}/dashboard/transaction/loan/${id}`;
+
 </script>
 
 <DropdownMenu.Root>
@@ -18,7 +20,7 @@
 	<DropdownMenu.Content>
 		<DropdownMenu.Group>
 			<DropdownMenu.Label>Actions</DropdownMenu.Label>
-			<DropdownMenu.Item>
+			<DropdownMenu.Item href={showUrl}>
 				Show
                 <DropdownMenu.Shortcut><Eye size={14}/></DropdownMenu.Shortcut>
 			</DropdownMenu.Item>

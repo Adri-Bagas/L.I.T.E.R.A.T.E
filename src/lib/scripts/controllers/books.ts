@@ -152,6 +152,26 @@ const Book = {
 			console.error(error);
 		}
 	},
+
+	findWithDetails: async function (token: string | undefined, id: string) {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${token}`);
+
+		const requestOptions: RequestInit = {
+			method: 'GET',
+			headers: myHeaders,
+			redirect: 'manual'
+		};
+
+		try {
+			const response = await fetch(`${CONFIG.apiUrl}/book/${id}/details`, requestOptions);
+			const result = await response.json();
+			return result;
+		} catch (error) {
+			console.error(error);
+		}
+	},
+
 	update: async function (token: string | undefined, id: string, datas: any) {
 		const myHeaders = new Headers();
 		myHeaders.append('Authorization', `Bearer ${token}`);

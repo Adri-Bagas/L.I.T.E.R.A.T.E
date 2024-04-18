@@ -11,6 +11,7 @@
 	export let id: string;
 
     let editRoute = `books/edit/${id}`;
+	let showUrl = `books/${id}`;
 
     async function deletes(id: string) {
 
@@ -48,7 +49,7 @@
 	<DropdownMenu.Content>
 		<DropdownMenu.Group>
 			<DropdownMenu.Label>Actions</DropdownMenu.Label>
-			<DropdownMenu.Item>
+			<DropdownMenu.Item href={showUrl}>
 				Show
                 <DropdownMenu.Shortcut><Eye size={14}/></DropdownMenu.Shortcut>
 			</DropdownMenu.Item>

@@ -1,4 +1,4 @@
-import User from '$lib/scripts/controllers/users.js';
+import Member from '$lib/scripts/controllers/member.js';
 import { error, json, redirect } from '@sveltejs/kit';
 
 /** @type {import('./$types').RequestHandler} */
@@ -9,7 +9,7 @@ export async function GET() {
 export async function DELETE({ cookies, params }) {
 	let token = cookies.get('to');
 
-	let datas = await User.delete(token, params.id);
+	let datas = await Member.delete(token, params.id);
 
 	return json(datas)
 }

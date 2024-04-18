@@ -1,7 +1,6 @@
 
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types.js";
-
 import Book from "$lib/scripts/controllers/books.js";
 
 

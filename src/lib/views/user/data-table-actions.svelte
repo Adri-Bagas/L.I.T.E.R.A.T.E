@@ -49,10 +49,10 @@
 	<DropdownMenu.Content>
 		<DropdownMenu.Group>
 			<DropdownMenu.Label>Actions</DropdownMenu.Label>
-			<DropdownMenu.Item>
+			<!-- <DropdownMenu.Item>
 				Show
                 <DropdownMenu.Shortcut><Eye size={14}/></DropdownMenu.Shortcut>
-			</DropdownMenu.Item>
+			</DropdownMenu.Item> -->
 		</DropdownMenu.Group>
 		<DropdownMenu.Separator />
 		<DropdownMenu.Item href={editRoute}>
