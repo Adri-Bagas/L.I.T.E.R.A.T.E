@@ -77,15 +77,11 @@
 		}),
 
 		table.column({
-			accessor: ({approver}) => approver.username,
-			header: 'Approved By'
-		}),
-		table.column({
 			id: 'actions',
 			accessor: ({ id }) => id,
 			header: 'Actions',
 			cell: ({ value }) => {
-				return createRender(DataTableActions, { id: value });
+				return createRender(DataTableActions, { showUrl: `http://localhost:5173/home/histories/${value}` });
 			},
 			plugins: {
 				sort: {

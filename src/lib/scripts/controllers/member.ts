@@ -98,10 +98,7 @@ const Member = {
 			error(500, `${errors}`);
 		}
 	},
-	store: async function (token: string | undefined, datas: any) {
-		const myHeaders = new Headers();
-		myHeaders.append('Authorization', `Bearer ${token}`);
-
+	store: async function (datas: any) {
 		const formdata = new FormData();
 		formdata.append('username', datas.username);
 		formdata.append('email', datas.email);
@@ -113,13 +110,12 @@ const Member = {
 
 		const requestOptions: RequestInit = {
 			method: 'POST',
-			headers: myHeaders,
 			body: formdata,
 			redirect: 'manual'
 		};
 
 		try {
-			const response = await fetch(`${CONFIG.apiUrl}/member`, requestOptions);
+			const response = await fetch(`${CONFIG.apiUrl}/member/register`, requestOptions);
 			const result = await response.json();
 
 			return result;

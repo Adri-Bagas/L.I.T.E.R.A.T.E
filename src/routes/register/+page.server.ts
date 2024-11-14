@@ -3,7 +3,10 @@ import { fail, superValidate } from 'sveltekit-superforms';
 import { formSchema } from '$lib/components/forms/schema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { Login } from '$lib/scripts/controllers/auth.js';
-import { redirect } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
+import { formMemberSchema } from '$lib/components/forms/members/schema.js';
+import Member from '$lib/scripts/controllers/member.js';
+import WaitingSomething from '$lib/scripts/stores/waiting-something.js';
 
 
 export const load: PageServerLoad = async () => {
@@ -27,7 +30,7 @@ export const load: PageServerLoad = async () => {
 	}
 
 	return {
-		form: await superValidate(zod(formSchema)),
+		form: await superValidate(zod(formMemberSchema)),
 		title: 'Login | L.I.T.E.R.A.T.E',
 		quote,
 		author
@@ -36,29 +39,23 @@ export const load: PageServerLoad = async () => {
 
 export const actions = {
 	default: async ({ request, cookies }) => {
-		
-		const form = await superValidate(request, zod(formSchema));
+		const form = await superValidate(request, zod(formMemberSchema));
 
 		if (!form.valid) {
 			return fail(400, { form });
 		}
 
-		let datas = await Login(form.data.email, form.data.password)
+		WaitingSomething.set(true);
 
-		if(datas.success){
-			cookies.set('to', datas.data.token, {
-				path: "/",
-				httpOnly: true
-			})
-	
-			cookies.set('user', JSON.stringify(datas.data.user), {
-				path: "/",
-				httpOnly: false,
-				secure: false
-			})
+		let datas = await Member.store(form.data);
 
-			redirect(300, "/home")
-		}
+		WaitingSomething.set(false);
+
+        if (datas.success == true) {
+            redirect(300, "/login")
+        } else {
+            error(datas.status_code, datas.msg);
+        }
 
 		return {form}
 	}

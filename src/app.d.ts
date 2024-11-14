@@ -20,20 +20,20 @@ declare global {
 	};
 
 	type Member = {
-		id:number; 
-		username:string;
-		full_name:string;
+		id: number;
+		username: string;
+		full_name: string;
 		email: string;
-		password:    string
-		phone_number: string
-		address:     string
-		created_at?:   string
-		updated_at?:   string
-		deleted_at?:   string
-		last_active?:  string
-		profile_pic?:  string
-		transactions?: TransactionLoanReturn[]
-	}
+		password: string;
+		phone_number: string;
+		address: string;
+		created_at?: string;
+		updated_at?: string;
+		deleted_at?: string;
+		last_active?: string;
+		profile_pic?: string;
+		transactions?: TransactionLoanReturn[];
+	};
 
 	type Author = {
 		id: number;
@@ -86,6 +86,7 @@ declare global {
 		condition: string | number;
 		books: BookDetails[];
 		media_loc?: string;
+		reviews: AvgWithReviews;
 	};
 
 	type BookDetails = {
@@ -94,7 +95,7 @@ declare global {
 		sn: string;
 		condition: string | number;
 		status: string | number;
-		price?: number ;
+		price?: number;
 	};
 
 	type Publisher = {
@@ -134,7 +135,7 @@ declare global {
 		created_at: string;
 		approver: User;
 	};
-	
+
 	type TransactionLoanReturn = {
 		id: number;
 		date: string;
@@ -147,6 +148,31 @@ declare global {
 		member: Member;
 		approver: User;
 		books: BookDetails[];
+	};
+
+	type BookSmallView = {
+		id: number;
+		book_detail_id: number;
+		title: string;
+		desc?: string;
+		is_online: boolean;
+		media_loc?: string;
+	};
+
+	type Reviews = {
+		id: number;
+		member_dd: number;
+		member_name: string;
+		book_id: number;
+		review: string;
+		rating: number;
+		created_at: string;
+		updated_at?: string;
+	};
+
+	type AvgWithReviews = {
+		avg: number
+		reviews: Reviews[]
 	}
 }
 

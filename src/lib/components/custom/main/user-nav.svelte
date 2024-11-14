@@ -2,8 +2,13 @@
 	import * as DropdownMenu from "$lib/components/ui/dropdown-menu/index";
 	import * as Avatar from "$lib/components/ui/avatar/index";
 	import { Button } from "$lib/components/ui/button/index";
+	import { LogOut } from "$lib/scripts/controllers/auth";
 
 	export let user: UserSafe;
+	
+	function refreshLogout() {
+		window.location.replace("http://localhost:5173/logout");
+	}
 	
 </script>
 
@@ -24,7 +29,7 @@
 			</div>
 		</DropdownMenu.Label>
 		<DropdownMenu.Separator />
-		<DropdownMenu.Group>
+		<!-- <DropdownMenu.Group>
 			<DropdownMenu.Item>
 				Profile
 			</DropdownMenu.Item>
@@ -32,8 +37,8 @@
 				Settings
 			</DropdownMenu.Item>
 		</DropdownMenu.Group>
-		<DropdownMenu.Separator />
-		<DropdownMenu.Item>
+		<DropdownMenu.Separator /> -->
+		<DropdownMenu.Item on:click={refreshLogout}>
 			Log out
 		</DropdownMenu.Item>
 	</DropdownMenu.Content>

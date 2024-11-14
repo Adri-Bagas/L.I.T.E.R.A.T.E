@@ -5,10 +5,10 @@
 	import { addPagination, addTableFilter } from 'svelte-headless-table/plugins';
 	import { Button } from '$lib/components/ui/button';
 	import { readable } from 'svelte/store';
+	import DataTableActions from './data-table-actions.svelte';
 
     export let books: BookDetails[]
-
-    console.log(books)
+    export let isAvailOnline: boolean
 
     let datas = readable(books)
 
@@ -38,6 +38,16 @@
 			accessor: 'status',
 			header: 'Status'
 		}),
+        table.column({
+            accessor: ( book ) => book,
+            header: "Actions",
+            cell: ({ value }) => {
+                if(isAvailOnline == true){
+                    return createRender(DataTableActions, {id: value.id})
+                }
+                return ""
+            }
+        })
 	]);
 
 	const { headerRows, pageRows, tableAttrs, tableBodyAttrs, pluginStates } =

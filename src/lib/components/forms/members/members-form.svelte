@@ -80,7 +80,9 @@
             </Form.Field>
         </div>
     </div>
-    <div class="flex justify-end">
-        <Form.Button>Submit</Form.Button>
+    
+    <div class="flex justify-center">
+        <Form.Button class="w-5/6 m-auto">Submit</Form.Button>
     </div>
+
 </form>

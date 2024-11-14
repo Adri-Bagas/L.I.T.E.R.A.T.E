@@ -13,7 +13,7 @@ const Login = async (email: string, password: string) => {
 	};
 
 	try {
-		const response = await fetch(`${CONFIG.apiUrl}/auth/login`, requestOptions);
+		const response = await fetch(`${CONFIG.apiUrl}/auth/login/member`, requestOptions);
 		const result = await response.json();
 		if (response.status == 200) {
             return result

@@ -22,7 +22,8 @@ const Loan = {
 				}
 				return result.datas;
 			} else {
-				error(response.status, result.msg);
+				console.error(response.status, result.msg);
+				return [];
 			}
 		} catch (errors) {
 			console.log(errors);
@@ -75,6 +76,85 @@ const Loan = {
 
 		try {
 			const response = await fetch(`${CONFIG.apiUrl}/transaction`, requestOptions);
+			const result = await response.json();
+
+			return result;
+		} catch (errors) {
+			console.error(errors);
+			error(500, `${errors}`);
+		}
+	},
+	storeOnline: async function (token: string | undefined, datas: number) {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${token}`);
+		myHeaders.append('Content-Type', 'application/json');
+
+		const raw = JSON.stringify({
+			transaction_type: 'LOAN_ONLINE',
+			books_id: [ datas ]
+		});
+
+		const requestOptions: RequestInit = {
+			method: 'POST',
+			headers: myHeaders,
+			body: raw,
+			redirect: 'manual'
+		};
+
+		try {
+			const response = await fetch(`${CONFIG.apiUrl}/transaction`, requestOptions);
+			const result = await response.json();
+
+			return result;
+		} catch (errors) {
+			console.error(errors);
+			error(500, `${errors}`);
+		}
+	},
+	storeOnlineReturn: async function (token: string | undefined, datas: number) {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${token}`);
+		myHeaders.append('Content-Type', 'application/json');
+
+		const raw = JSON.stringify({
+			transaction_type: 'RETURN_ONLINE',
+			books_id: [ datas ]
+		});
+
+		const requestOptions: RequestInit = {
+			method: 'POST',
+			headers: myHeaders,
+			body: raw,
+			redirect: 'manual'
+		};
+
+		try {
+			const response = await fetch(`${CONFIG.apiUrl}/transaction`, requestOptions);
+			const result = await response.json();
+
+			return result;
+		} catch (errors) {
+			console.error(errors);
+			error(500, `${errors}`);
+		}
+	},
+	genBookAccess: async function (token: string | undefined, id: number) {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${token}`);
+
+		const formdata = new FormData();
+		formdata.append("details_id", `${id}`);
+
+
+		const requestOptions: RequestInit = {
+			method: 'POST',
+			headers: myHeaders,
+			body: formdata,
+			redirect: 'manual'
+		};
+
+		try {
+			const response = await fetch(`${CONFIG.apiUrl}/book/gen`, requestOptions);
 			const result = await response.json();
 
 			return result;

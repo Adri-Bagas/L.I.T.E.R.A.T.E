@@ -4,9 +4,7 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { Button } from '$lib/components/ui/button';
 
-	export let id: any;
-
-	let showUrl = `${window.location.origin}/dashboard/transaction/loan/${id}`;
+	export let showUrl: any;
 
 </script>
 
